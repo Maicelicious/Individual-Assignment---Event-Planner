@@ -1,28 +1,34 @@
-package nl.hva.msi.eventplanner.Fragments;
+package nl.hva.msi.eventplanner.ui.Fragments;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import nl.hva.msi.eventplanner.R;
+import nl.hva.msi.eventplanner.ui.fragments.EventViewModel;
+import nl.hva.msi.eventplanner.ui.fragments.HomeViewModel;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link GroupFragment.OnFragmentInteractionListener} interface
+ * {@link EventFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link GroupFragment#newInstance} factory method to
+ * Use the {@link EventFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GroupFragment extends Fragment {
+public class EventFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private EventViewModel eventViewModel;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -30,7 +36,7 @@ public class GroupFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public GroupFragment() {
+    public EventFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +46,11 @@ public class GroupFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GroupFragment.
+     * @return A new instance of fragment EventFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GroupFragment newInstance(String param1, String param2) {
-        GroupFragment fragment = new GroupFragment();
+    public static EventFragment newInstance(String param1, String param2) {
+        EventFragment fragment = new EventFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,7 +71,7 @@ public class GroupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_group, container, false);
+        return inflater.inflate(R.layout.fragment_event, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -76,15 +82,15 @@ public class GroupFragment extends Fragment {
     }
 
 //    @Override
-////    public void onAttach(Context context) {
-////        super.onAttach(context);
-////        if (context instanceof OnFragmentInteractionListener) {
-////            mListener = (OnFragmentInteractionListener) context;
-////        } else {
-////            throw new RuntimeException(context.toString()
-////                    + " must implement OnFragmentInteractionListener");
-////        }
-////    }
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
     @Override
     public void onDetach() {
@@ -105,5 +111,12 @@ public class GroupFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
+        // TODO: Use the ViewModel
     }
 }

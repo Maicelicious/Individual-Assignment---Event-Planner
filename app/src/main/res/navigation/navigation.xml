@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="nl.hva.msi.eventplanner.Fragments.EventFragment"
+        android:label="fragment_event"
+        tools:layout="@layout/fragment_event" />
+    <fragment
+        android:id="@+id/eventShareFragment"
+        android:name="nl.hva.msi.eventplanner.Fragments.EventShareFragment"
+        android:label="fragment_event_share"
+        tools:layout="@layout/fragment_event_share" />
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="nl.hva.msi.eventplanner.Fragments.GroupFragment"
+        android:label="fragment_group"
+        tools:layout="@layout/fragment_group" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="nl.hva.msi.eventplanner.Fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>

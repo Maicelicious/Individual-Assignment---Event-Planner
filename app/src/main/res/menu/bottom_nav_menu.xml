@@ -12,12 +12,12 @@
         android:title="@string/group" />
 
     <item
-        android:id="@+id/navigation_event_search"
-        android:icon="@drawable/ic_search_black_24dp"
-        android:title="@string/event_search" />
-
-    <item
         android:id="@+id/navigation_event"
         android:icon="@drawable/ic_event_black_24dp"
         android:title="@string/event" />
+    <item
+        android:id="@+id/navigation_share"
+        android:icon="@drawable/meeting"
+        android:title="@string/Event_share" />
+
 </menu>
