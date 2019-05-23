@@ -7,6 +7,6 @@ import lombok.Data;
 @SuppressWarnings("unused")
 public class Sales {
 
-    private Public public;
+    private Public _public;
 
 }

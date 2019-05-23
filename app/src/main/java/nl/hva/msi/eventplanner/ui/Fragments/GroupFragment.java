@@ -1,15 +1,35 @@
-package nl.hva.msi.eventplanner.ui.fragments;
+package nl.hva.msi.eventplanner.ui.Fragments;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
+
 import nl.hva.msi.eventplanner.R;
+import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
+import nl.hva.msi.eventplanner.ui.logic.ClickListener;
+import nl.hva.msi.eventplanner.ui.logic.GroupRecyclerViewAdapter;
+import nl.hva.msi.eventplanner.ui.logic.RecyclerViewTouchListener;
 
 
 /**
@@ -20,13 +40,20 @@ import nl.hva.msi.eventplanner.R;
  * Use the {@link GroupFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GroupFragment extends Fragment {
+public class GroupFragment extends Fragment implements RecyclerView.OnItemTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private GroupRecyclerViewAdapter groupRecyclerViewAdapter;
+    private RecyclerView recyclerView;
     private GroupViewModel groupViewModel;
+    private List<GroupEntity> groups;
+    private List<GroupEntity> tempGroups;
+    private View.OnClickListener getGetMyGameBack;
+    private GroupEntity tempGroup;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -63,13 +90,110 @@ public class GroupFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_group, container, false);
+
+
+        View view = inflater.inflate(R.layout.fragment_group, container, false);
+        this.recyclerView = view.findViewById(R.id.recyclerViewGroup);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        groups = new LinkedList<>();
+        tempGroups = new LinkedList<>();
+        updateUI();
+
+        groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
+
+        groupViewModel.getAllGroups().observe(this, new Observer<List<GroupEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<GroupEntity> groupEntities) {
+                groups = groupEntities;
+                updateUI();
+            }
+        });
+
+        FloatingActionButton fab = view.findViewById(R.id.group_add);
+        fab.setOnClickListener(view1 -> {
+            Fragment newFragment = new GroupCreateFragment();
+            FragmentManager manager = getFragmentManager();
+            if (manager != null) {
+                manager.beginTransaction().replace(R.id.fragment_container, newFragment).commit();
+            } else {
+                //do smth
+            }
+
+        });
+
+        //touchlistener for the recyclerView
+        recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getContext(), recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                GroupEntity editGame = groups.get(position);
+                Fragment newFragment = new GroupEditFragment();
+                FragmentManager manager = getFragmentManager();
+                if (manager != null) {
+                    manager.beginTransaction().replace(R.id.fragment_container, newFragment).commit();
+                }
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
+        //Swiping with a ItemTouchHelper
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                int pos = viewHolder.getAdapterPosition();
+
+                tempGroup = groups.get(pos);
+                groupViewModel.deleteGroup(groups.get(pos));
+                groups.remove(pos);
+                groupRecyclerViewAdapter.notifyItemRemoved(pos);
+
+                Snackbar.make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), tempGroup.getGroupName() + " has been deleted", Snackbar.LENGTH_LONG)
+                        .setAction(R.string.snackbar_undo, getGetMyGameBack)
+                        .setActionTextColor(Color.MAGENTA)
+                        .show();
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+        recyclerView.addOnItemTouchListener(this);
+
+        //obviously we need Listeners for the Snackbar
+        getGetMyGameBack = v -> {
+            groupViewModel.insertGroup(tempGroup);
+            updateUI();
+        };
+
+
+        return view;
+    }
+
+    private void updateUI() {
+        if (groupRecyclerViewAdapter == null) {
+            groupRecyclerViewAdapter = new GroupRecyclerViewAdapter(groups);
+            recyclerView.setAdapter(groupRecyclerViewAdapter);
+        } else {
+            groupRecyclerViewAdapter.swapList(groups);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -96,6 +220,21 @@ public class GroupFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public boolean onInterceptTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public void onTouchEvent(@NonNull RecyclerView recyclerView, @NonNull MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public void onRequestDisallowInterceptTouchEvent(boolean b) {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -116,5 +255,6 @@ public class GroupFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
         // TODO: Use the ViewModel
+
     }
 }

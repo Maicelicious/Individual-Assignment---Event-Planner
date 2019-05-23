@@ -5,12 +5,18 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {EventEntity.class}, version = 1, exportSchema = false)
+import nl.hva.msi.eventplanner.data.event.database.daos.EventDao;
+import nl.hva.msi.eventplanner.data.event.database.daos.GroupDao;
+import nl.hva.msi.eventplanner.data.event.database.entities.EventEntity;
+import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
+
+@Database(entities = {EventEntity.class, GroupEntity.class}, version = 1, exportSchema = false)
 public abstract class EventDatabase extends RoomDatabase {
 
     private final static String NAME_DATABASE = "db_event";
 
     public abstract EventDao eventDao();
+    public abstract GroupDao groupDao();
 
     private static volatile EventDatabase INSTANCE;
 

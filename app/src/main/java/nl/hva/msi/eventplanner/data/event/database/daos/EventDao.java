@@ -1,4 +1,4 @@
-package nl.hva.msi.eventplanner.data.event.database;
+package nl.hva.msi.eventplanner.data.event.database.daos;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -9,7 +9,10 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import nl.hva.msi.eventplanner.data.event.database.entities.EventEntity;
+
 @Dao
+public
 interface EventDao {
 
     @Query("SELECT * FROM event")

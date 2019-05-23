@@ -8,7 +8,7 @@ import lombok.Data;
 @SuppressWarnings("unused")
 public class Venue {
 
-    private nl.hva.msi.eventplanner.data.event.model._links _links;
+    private _links _links;
     private String accessibleSeatingDetail;
     private Address address;
     private BoxOfficeInfo boxOfficeInfo;

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import nl.hva.msi.eventplanner.R;
-import nl.hva.msi.eventplanner.ui.fragments.EventShareViewModel;
 
 
 /**

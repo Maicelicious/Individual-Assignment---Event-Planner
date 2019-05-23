@@ -1,10 +1,12 @@
-package nl.hva.msi.eventplanner.ui.fragments;
+package nl.hva.msi.eventplanner.ui.Fragments;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,8 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private FragmentActivity myContext;
 
     private HomeViewModel mViewModel;
 
@@ -64,13 +68,33 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        FloatingActionButton fab = view.findViewById(R.id.homeFab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Fragment newFragment = new GroupCreateFragment();
+//                FragmentManager manager = getFragmentManager();
+//                if (manager != null) {
+//                    manager.beginTransaction().replace(R.id.fragment_container, newFragment).commit();
+//                } else {
+//                    //do smth
+//                }
+//
+//            }
+//        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

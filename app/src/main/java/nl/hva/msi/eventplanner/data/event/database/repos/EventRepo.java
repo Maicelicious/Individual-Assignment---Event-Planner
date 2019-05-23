@@ -1,4 +1,4 @@
-package nl.hva.msi.eventplanner.data.event.database;
+package nl.hva.msi.eventplanner.data.event.database.repos;
 
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
@@ -6,6 +6,10 @@ import android.content.Context;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
+import nl.hva.msi.eventplanner.data.event.database.EventDatabase;
+import nl.hva.msi.eventplanner.data.event.database.entities.EventEntity;
+import nl.hva.msi.eventplanner.data.event.database.daos.EventDao;
 
 public class EventRepo implements EventDao {
 

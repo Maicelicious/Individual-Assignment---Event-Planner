@@ -1,8 +1,19 @@
 package nl.hva.msi.eventplanner.data.mapper;
 
 
-import nl.hva.msi.eventplanner.data.event.database.EventEntity;
+import nl.hva.msi.eventplanner.data.event.database.entities.EventEntity;
+import nl.hva.msi.eventplanner.data.event.model.Address;
+import nl.hva.msi.eventplanner.data.event.model.City;
+import nl.hva.msi.eventplanner.data.event.model.Country;
+import nl.hva.msi.eventplanner.data.event.model.Dates;
 import nl.hva.msi.eventplanner.data.event.model.Event;
+import nl.hva.msi.eventplanner.data.event.model.GeneralInfo;
+import nl.hva.msi.eventplanner.data.event.model.Genre;
+import nl.hva.msi.eventplanner.data.event.model.Image;
+import nl.hva.msi.eventplanner.data.event.model.Public;
+import nl.hva.msi.eventplanner.data.event.model.Start;
+import nl.hva.msi.eventplanner.data.event.model.State;
+import nl.hva.msi.eventplanner.data.event.model.Status;
 
 public class Mapper {
 
@@ -17,50 +28,111 @@ public class Mapper {
         }
     }
 
-    public EventEntity mapEventtoEntityEvent(Event event){
+    public EventEntity mapEventtoEntityEvent(Event event, Address adress, GeneralInfo generalInfo, City city, Country country, Dates dates, Genre genre, Image image, Start start,Status status, State state, Public p){
         EventEntity eventEntity = new EventEntity();
-        eventEntity.set_embedded(event.get_embedded());
-        eventEntity.set_links(event.get_links());
-        eventEntity.setClassifications(event.getClassifications());
-        eventEntity.setDates(event.getDates());
+        eventEntity.setAdress(adress.getLine1());
+        eventEntity.setChildRule(generalInfo.getChildRule());
+        eventEntity.setGeneralRule(generalInfo.getGeneralRule());
+        eventEntity.setCity(city.getName());
+        eventEntity.setCountry(country.getName());
+        eventEntity.setCountryCode(country.getCountryCode());
+        eventEntity.setDateTime(start.getDateTime());
+        eventEntity.setEventType(event.getType());
+        eventEntity.setGenre(genre.getName());
+        eventEntity.setImageHeight(image.getHeight());
+        eventEntity.setImageRatio(image.getRatio());
+        eventEntity.setImageUrl(image.getUrl());
+        eventEntity.setImageWidth(image.getWidth());
         eventEntity.setId(event.getId());
-        eventEntity.setImages(event.getImages());
+        eventEntity.setLocalDate(start.getLocalDate());
         eventEntity.setLocale(event.getLocale());
-        eventEntity.setName(event.getName());
         eventEntity.setPleaseNote(event.getPleaseNote());
-        eventEntity.setPriceRanges(event.getPriceRanges());
-        eventEntity.setPromoter(event.getPromoter());
-        eventEntity.setPromoters(event.getPromoters());
-        eventEntity.setSales(event.getSales());
-        eventEntity.setSeatmap(event.getSeatmap());
-        eventEntity.setTest(event.getTest());
-        eventEntity.setTicketLimit(event.getTicketLimit());
+        eventEntity.setLocalTime(start.getLocalTime());
+        eventEntity.setName(event.getName());
+        eventEntity.setStatusCode(state.getStateCode());
+        eventEntity.setTimezone(dates.getTimezone());
+        eventEntity.setUrl(event.getUrl());
+        eventEntity.setType(event.getType());
         eventEntity.setType(event.getType());
         eventEntity.setUrl(event.getUrl());
+        eventEntity.setSalesEndDateTime(p.getEndDateTime());
+        eventEntity.setSalesStartDateTime(p.getStartDateTime());
+        eventEntity.setTicketSaleState(status.getCode());
         return eventEntity;
     }
 
     public Event mapEventEntityToEvent(EventEntity eventEntity) {
         Event event = new Event();
-        event.set_embedded(eventEntity.get_embedded());
-        event.set_links(eventEntity.get_links());
-        event.setClassifications(eventEntity.getClassifications());
-        event.setDates(eventEntity.getDates());
-        event.setId(eventEntity.getId());
-        event.setImages(eventEntity.getImages());
-        event.setLocale(eventEntity.getLocale());
-        event.setName(eventEntity.getName());
-        event.setPleaseNote(eventEntity.getPleaseNote());
-        event.setPriceRanges(eventEntity.getPriceRanges());
-        event.setPromoter(eventEntity.getPromoter());
-        event.setPromoters(eventEntity.getPromoters());
-        event.setSales(eventEntity.getSales());
-        event.setSeatmap(eventEntity.getSeatmap());
-        event.setTest(eventEntity.getTest());
-        event.setTicketLimit(eventEntity.getTicketLimit());
         event.setType(eventEntity.getType());
         event.setUrl(eventEntity.getUrl());
 
         return event;
+    }
+
+    public Address mapEntityToAdress(EventEntity eventEntity) {
+        Address address = new Address();
+        address.setLine1(eventEntity.getAdress());
+        return address;
+    }
+
+    public GeneralInfo mapEntitytoGeneralInfo(EventEntity eventEntity) {
+        GeneralInfo generalInfo = new GeneralInfo();
+        generalInfo.setChildRule(eventEntity.getChildRule());
+        generalInfo.setGeneralRule(eventEntity.getGeneralRule());
+        return generalInfo;
+    }
+    public Genre mapEntityToGenre(EventEntity eventEntity) {
+        Genre genre = new Genre();
+        genre.setName(eventEntity.getName());
+        return genre;
+    }
+
+    public City mapEntityToCity(EventEntity eventEntity) {
+        City city = new City();
+        city.setName(eventEntity.getName());
+        return city;
+    }
+
+    public Country mapEntityToCountry(EventEntity eventEntity) {
+        Country country = new Country();
+        country.setCountryCode(eventEntity.getCountryCode());
+        country.setName(eventEntity.getCountry());
+        return country;
+    }
+
+    public Dates mapEntityToDates(EventEntity eventEntity) {
+        Dates date = new Dates();
+        Start start = new Start();
+        start.setDateTime(eventEntity.getDateTime());
+        start.setLocalDate(eventEntity.getLocalDate());
+        start.setLocalTime(eventEntity.getLocalTime());
+        Status state = new Status();
+        state.setCode(eventEntity.getTicketSaleState());
+        date.setStart(start);
+        date.setStatus(state);
+        date.setTimezone(eventEntity.getTimezone());
+        return date;
+    }
+
+    public Public mapEntityToPublic(EventEntity eventEntity) {
+        Public aPublic = new Public();
+        aPublic.setEndDateTime(eventEntity.getSalesEndDateTime());
+        aPublic.setStartDateTime(eventEntity.getSalesStartDateTime());
+        return aPublic;
+    }
+
+    public State mapEntityToState(EventEntity eventEntity) {
+        State state = new State();
+        state.setStateCode(eventEntity.getStatusCode());
+        return state;
+    }
+
+    public Image mapEntityToImage(EventEntity eventEntity) {
+        Image image = new Image();
+        image.setHeight(eventEntity.getImageHeight());
+        image.setRatio(eventEntity.getImageRatio());
+        image.setUrl(eventEntity.getUrl());
+        image.setWidth(eventEntity.getImageWidth());
+        return image;
     }
 }

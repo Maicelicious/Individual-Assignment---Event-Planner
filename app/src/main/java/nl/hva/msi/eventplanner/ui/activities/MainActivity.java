@@ -1,17 +1,17 @@
 package nl.hva.msi.eventplanner.ui.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
 import nl.hva.msi.eventplanner.R;
 import nl.hva.msi.eventplanner.ui.Fragments.EventFragment;
 import nl.hva.msi.eventplanner.ui.Fragments.EventShareFragment;
-import nl.hva.msi.eventplanner.ui.fragments.GroupFragment;
-import nl.hva.msi.eventplanner.ui.fragments.HomeFragment;
+import nl.hva.msi.eventplanner.ui.Fragments.GroupFragment;
+import nl.hva.msi.eventplanner.ui.Fragments.HomeFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     selectedFragment = homeFragment;
-
                     break;
                 case R.id.navigation_group:
                     selectedFragment = new GroupFragment();
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
             }
             if (selectedFragment != null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
-
             } else {
                 selectedFragment = new HomeFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
@@ -59,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         homeFragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
+
 
     }
 

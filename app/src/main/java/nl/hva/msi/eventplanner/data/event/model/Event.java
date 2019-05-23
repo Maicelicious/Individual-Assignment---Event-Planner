@@ -8,8 +8,8 @@ import lombok.Data;
 @SuppressWarnings("unused")
 public class Event {
 
-    private nl.hva.msi.eventplanner.data.event.model._embedded _embedded;
-    private nl.hva.msi.eventplanner.data.event.model._links _links;
+    private _embedded _embedded;
+    private _links _links;
     private List<Classification> classifications;
     private Dates dates;
     private String id;

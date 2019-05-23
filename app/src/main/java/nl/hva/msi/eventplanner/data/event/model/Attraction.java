@@ -8,7 +8,7 @@ import lombok.Data;
 @SuppressWarnings("unused")
 public class Attraction {
 
-    private nl.hva.msi.eventplanner.data.event.model._links _links;
+    private _links _links;
     private List<Classification> classifications;
     private String href;
     private String id;
