@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
@@ -34,7 +35,11 @@ public class GroupRecyclerViewAdapter extends RecyclerView.Adapter<GroupRecycler
         final GroupEntity groupEntity = allGroupEntities.get(i);
         viewHolder.groupName.setText((groupEntity.getGroupName()));
         viewHolder.created.setText(groupEntity.getCreated());
+        viewHolder.description.setText(groupEntity.getDescription());
+
+        viewHolder.favourite.setChecked(groupEntity.isFavourite());
     }
+
 
     @Override
     public int getItemCount() {
@@ -53,12 +58,17 @@ public class GroupRecyclerViewAdapter extends RecyclerView.Adapter<GroupRecycler
         CardView parentLayout;
         TextView groupName;
         TextView created;
+        TextView description;
+        CheckBox favourite;
+
 
         ViewHolder(View itemView) {
             super(itemView);
             groupName = itemView.findViewById(R.id.groupListName);
+            description = itemView.findViewById(R.id.description);
             created = itemView.findViewById(R.id.dateCreatedText);
             parentLayout = itemView.findViewById(R.id.cardViewEdit);
+            favourite = itemView.findViewById(R.id.groupFavourite);
             parentLayout.setClickable(true);
         }
     }

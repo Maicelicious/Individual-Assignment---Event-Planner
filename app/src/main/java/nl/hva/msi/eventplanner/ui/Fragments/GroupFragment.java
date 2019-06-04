@@ -1,6 +1,5 @@
 package nl.hva.msi.eventplanner.ui.Fragments;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
 import android.net.Uri;
@@ -27,6 +26,7 @@ import java.util.Objects;
 
 import nl.hva.msi.eventplanner.R;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
+import nl.hva.msi.eventplanner.ui.Fragments.Viewmodel.GroupViewModel;
 import nl.hva.msi.eventplanner.ui.logic.ClickListener;
 import nl.hva.msi.eventplanner.ui.logic.GroupRecyclerViewAdapter;
 import nl.hva.msi.eventplanner.ui.logic.RecyclerViewTouchListener;
@@ -62,7 +62,7 @@ public class GroupFragment extends Fragment implements RecyclerView.OnItemTouchL
     private OnFragmentInteractionListener mListener;
 
     public GroupFragment() {
-        // Required empty public constructor
+
     }
 
     /**
@@ -92,16 +92,17 @@ public class GroupFragment extends Fragment implements RecyclerView.OnItemTouchL
         }
 
 
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-
+        // Inflate the layout for this
         View view = inflater.inflate(R.layout.fragment_group, container, false);
+
         this.recyclerView = view.findViewById(R.id.recyclerViewGroup);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -111,12 +112,9 @@ public class GroupFragment extends Fragment implements RecyclerView.OnItemTouchL
 
         groupViewModel = ViewModelProviders.of(this).get(GroupViewModel.class);
 
-        groupViewModel.getAllGroups().observe(this, new Observer<List<GroupEntity>>() {
-            @Override
-            public void onChanged(@Nullable List<GroupEntity> groupEntities) {
-                groups = groupEntities;
-                updateUI();
-            }
+        groupViewModel.getAllGroups().observe(this, groupEntities -> {
+            groups = groupEntities;
+            updateUI();
         });
 
         FloatingActionButton fab = view.findViewById(R.id.group_add);
@@ -135,8 +133,8 @@ public class GroupFragment extends Fragment implements RecyclerView.OnItemTouchL
         recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getContext(), recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                GroupEntity editGame = groups.get(position);
-                Fragment newFragment = new GroupEditFragment();
+                GroupEntity group = groups.get(position);
+                Fragment newFragment = new GroupEventListFragment();
                 FragmentManager manager = getFragmentManager();
                 if (manager != null) {
                     manager.beginTransaction().replace(R.id.fragment_container, newFragment).commit();
@@ -146,7 +144,12 @@ public class GroupFragment extends Fragment implements RecyclerView.OnItemTouchL
 
             @Override
             public void onLongClick(View view, int position) {
-
+                GroupEntity editGame = groups.get(position);
+                Fragment newFragment = GroupEditFragment.newInstance(editGame);
+                FragmentManager manager = getFragmentManager();
+                if (manager != null) {
+                    manager.beginTransaction().replace(R.id.fragment_container, newFragment).commit();
+                }
             }
         }));
 
@@ -182,7 +185,6 @@ public class GroupFragment extends Fragment implements RecyclerView.OnItemTouchL
             groupViewModel.insertGroup(tempGroup);
             updateUI();
         };
-
 
         return view;
     }

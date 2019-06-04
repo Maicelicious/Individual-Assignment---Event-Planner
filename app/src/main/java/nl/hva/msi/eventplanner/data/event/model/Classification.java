@@ -1,18 +1,29 @@
 
 package nl.hva.msi.eventplanner.data.event.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Data;
 
 @Data
 @SuppressWarnings("unused")
 public class Classification {
 
-    private Boolean family;
-    private Genre genre;
+    @SerializedName("primary")
+    @Expose
     private Boolean primary;
+    @SerializedName("segment")
+    @Expose
     private Segment segment;
+    @SerializedName("genre")
+    @Expose
+    private Genre genre;
+    @SerializedName("subGenre")
+    @Expose
     private SubGenre subGenre;
-    private SubType subType;
-    private Type type;
+    @SerializedName("family")
+    @Expose
+    private Boolean family;
 
 }

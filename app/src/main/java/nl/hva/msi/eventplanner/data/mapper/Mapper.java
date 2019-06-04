@@ -7,12 +7,10 @@ import nl.hva.msi.eventplanner.data.event.model.City;
 import nl.hva.msi.eventplanner.data.event.model.Country;
 import nl.hva.msi.eventplanner.data.event.model.Dates;
 import nl.hva.msi.eventplanner.data.event.model.Event;
-import nl.hva.msi.eventplanner.data.event.model.GeneralInfo;
 import nl.hva.msi.eventplanner.data.event.model.Genre;
 import nl.hva.msi.eventplanner.data.event.model.Image;
 import nl.hva.msi.eventplanner.data.event.model.Public;
 import nl.hva.msi.eventplanner.data.event.model.Start;
-import nl.hva.msi.eventplanner.data.event.model.State;
 import nl.hva.msi.eventplanner.data.event.model.Status;
 
 public class Mapper {
@@ -28,11 +26,9 @@ public class Mapper {
         }
     }
 
-    public EventEntity mapEventtoEntityEvent(Event event, Address adress, GeneralInfo generalInfo, City city, Country country, Dates dates, Genre genre, Image image, Start start,Status status, State state, Public p){
+    public EventEntity mapEventtoEntityEvent(Event event, Address adress, City city, Country country, Dates dates, Genre genre, Image image, Start start, Status status, Public p){
         EventEntity eventEntity = new EventEntity();
         eventEntity.setAdress(adress.getLine1());
-        eventEntity.setChildRule(generalInfo.getChildRule());
-        eventEntity.setGeneralRule(generalInfo.getGeneralRule());
         eventEntity.setCity(city.getName());
         eventEntity.setCountry(country.getName());
         eventEntity.setCountryCode(country.getCountryCode());
@@ -46,10 +42,8 @@ public class Mapper {
         eventEntity.setId(event.getId());
         eventEntity.setLocalDate(start.getLocalDate());
         eventEntity.setLocale(event.getLocale());
-        eventEntity.setPleaseNote(event.getPleaseNote());
         eventEntity.setLocalTime(start.getLocalTime());
         eventEntity.setName(event.getName());
-        eventEntity.setStatusCode(state.getStateCode());
         eventEntity.setTimezone(dates.getTimezone());
         eventEntity.setUrl(event.getUrl());
         eventEntity.setType(event.getType());
@@ -58,6 +52,7 @@ public class Mapper {
         eventEntity.setSalesEndDateTime(p.getEndDateTime());
         eventEntity.setSalesStartDateTime(p.getStartDateTime());
         eventEntity.setTicketSaleState(status.getCode());
+        //TODO Rewrite to new Models
         return eventEntity;
     }
 
@@ -75,12 +70,6 @@ public class Mapper {
         return address;
     }
 
-    public GeneralInfo mapEntitytoGeneralInfo(EventEntity eventEntity) {
-        GeneralInfo generalInfo = new GeneralInfo();
-        generalInfo.setChildRule(eventEntity.getChildRule());
-        generalInfo.setGeneralRule(eventEntity.getGeneralRule());
-        return generalInfo;
-    }
     public Genre mapEntityToGenre(EventEntity eventEntity) {
         Genre genre = new Genre();
         genre.setName(eventEntity.getName());
@@ -121,18 +110,13 @@ public class Mapper {
         return aPublic;
     }
 
-    public State mapEntityToState(EventEntity eventEntity) {
-        State state = new State();
-        state.setStateCode(eventEntity.getStatusCode());
-        return state;
-    }
 
     public Image mapEntityToImage(EventEntity eventEntity) {
         Image image = new Image();
-        image.setHeight(eventEntity.getImageHeight());
+        image.setHeight((int) eventEntity.getImageHeight());
         image.setRatio(eventEntity.getImageRatio());
         image.setUrl(eventEntity.getUrl());
-        image.setWidth(eventEntity.getImageWidth());
+        image.setWidth((int) eventEntity.getImageWidth());
         return image;
     }
 }

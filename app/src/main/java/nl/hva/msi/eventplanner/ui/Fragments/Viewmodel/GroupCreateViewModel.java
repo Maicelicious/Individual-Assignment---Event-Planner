@@ -1,4 +1,4 @@
-package nl.hva.msi.eventplanner.ui.Fragments;
+package nl.hva.msi.eventplanner.ui.Fragments.Viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
@@ -13,12 +13,12 @@ import nl.hva.msi.eventplanner.data.event.database.daos.GroupDao;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
 import nl.hva.msi.eventplanner.data.event.database.repos.GroupRepo;
 
-public class GroupViewModel extends AndroidViewModel implements GroupDao {
+public class GroupCreateViewModel extends AndroidViewModel implements GroupDao {
 
     private GroupRepo groupRepo;
     private LiveData<List<GroupEntity>> groups;
 
-    public GroupViewModel(@NonNull Application application) {
+    public GroupCreateViewModel(@NonNull Application application) {
         super(application);
         groupRepo = new GroupRepo(application.getApplicationContext());
         groups = groupRepo.getAllGroups();

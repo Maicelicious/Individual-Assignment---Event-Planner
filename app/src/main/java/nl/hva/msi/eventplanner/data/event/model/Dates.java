@@ -1,15 +1,26 @@
 
 package nl.hva.msi.eventplanner.data.event.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Data;
 
 @Data
 @SuppressWarnings("unused")
 public class Dates {
 
-    private Boolean spanMultipleDays;
+    @SerializedName("start")
+    @Expose
     private Start start;
-    private Status status;
+    @SerializedName("timezone")
+    @Expose
     private String timezone;
+    @SerializedName("status")
+    @Expose
+    private Status status;
+    @SerializedName("spanMultipleDays")
+    @Expose
+    private Boolean spanMultipleDays;
 
 }

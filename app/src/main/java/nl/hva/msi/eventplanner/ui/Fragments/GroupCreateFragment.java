@@ -12,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import nl.hva.msi.eventplanner.R;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
+import nl.hva.msi.eventplanner.ui.Fragments.Viewmodel.GroupCreateViewModel;
 
 public class GroupCreateFragment extends Fragment {
 
@@ -36,6 +38,8 @@ public class GroupCreateFragment extends Fragment {
         groupCreateViewModel = ViewModelProviders.of(this).get(GroupCreateViewModel.class);
 
         EditText groupEditText = view.findViewById(R.id.groupNameInput);
+        EditText groupDescr = view.findViewById(R.id.descriptionInput);
+        CheckBox favrourite = view.findViewById(R.id.favouriteCheckbox);
 
         save.setOnClickListener(view1 -> {
             GroupFragment newFragment = null;
@@ -48,8 +52,27 @@ public class GroupCreateFragment extends Fragment {
                     GroupEntity groupEntity = new GroupEntity();
 
                     String groupName = groupEditText.getText().toString();
+                    String desc = groupDescr.getText().toString();
+                    boolean isFav = favrourite.isChecked();
                     groupEntity.setGroupName(groupName);
+                    groupEntity.setDescription(desc);
+                    groupEntity.setFavourite(isFav);
                     groupCreateViewModel.insertGroup(groupEntity);
+                    manager.beginTransaction().replace(R.id.fragment_container, newFragment).commit();
+
+                } else {
+                    //TODO: Error handling
+                }
+            }
+        });
+        cancel.setOnClickListener(view1 -> {
+            GroupFragment newFragment = null;
+            if (getFragmentManager() != null) {
+                newFragment = new GroupFragment();
+            }
+            if (newFragment != null) {
+                FragmentManager manager = getFragmentManager();
+                if (manager != null) {
                     manager.beginTransaction().replace(R.id.fragment_container, newFragment).commit();
 
                 } else {

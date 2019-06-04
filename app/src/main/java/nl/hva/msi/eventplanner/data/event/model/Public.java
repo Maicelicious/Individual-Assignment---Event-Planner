@@ -1,14 +1,23 @@
 
 package nl.hva.msi.eventplanner.data.event.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Data;
 
 @Data
 @SuppressWarnings("unused")
 public class Public {
 
-    private String endDateTime;
+    @SerializedName("startDateTime")
+    @Expose
     private String startDateTime;
+    @SerializedName("startTBD")
+    @Expose
     private Boolean startTBD;
+    @SerializedName("endDateTime")
+    @Expose
+    private String endDateTime;
 
 }

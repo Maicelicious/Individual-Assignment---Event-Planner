@@ -26,4 +26,8 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="groupname">GroupName</string>
+    <string name="headimage">HeadImage</string>
+    <string name="description">Description</string>
+    <string name="favourite">Favourite</string>
+    <string name="editgroup">editGroup</string>
 </resources>

@@ -13,8 +13,12 @@ public class GroupEntity implements Serializable {
     private long id;
     @ColumnInfo(name = "groupName")
     private String groupName;
+    @ColumnInfo(name = "description")
+    private String description;
     @ColumnInfo(name = "created")
     private String created;
+    @ColumnInfo(name = "favourite")
+    private boolean favourite;
 
     public long getId() {
         return id;
@@ -38,5 +42,21 @@ public class GroupEntity implements Serializable {
 
     public void setCreated(String created) {
         this.created = created;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
     }
 }

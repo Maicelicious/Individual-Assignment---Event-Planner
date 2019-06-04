@@ -19,9 +19,15 @@ android {
 
     }
     buildTypes {
+        debug {
+            buildConfigField 'String', "ApiKey", TicketMaster_Api_Key
+            resValue 'string', "api_key", TicketMaster_Api_Key
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "ApiKey", TicketMaster_Api_Key
+            resValue 'string', "api_key", TicketMaster_Api_Key
         }
     }
     compileOptions {
@@ -54,4 +60,16 @@ dependencies {
     def room_version = "1.1.1"
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    //Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
 }

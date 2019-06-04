@@ -1,30 +1,58 @@
-
 package nl.hva.msi.eventplanner.data.event.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
+
 import lombok.Data;
 
 @Data
-@SuppressWarnings("unused")
 public class Event {
 
-    private _embedded _embedded;
-    private _links _links;
-    private List<Classification> classifications;
-    private Dates dates;
-    private String id;
-    private List<Image> images;
-    private String locale;
+    @SerializedName("name")
+    @Expose
     private String name;
-    private String pleaseNote;
-    private List<PriceRange> priceRanges;
-    private Promoter promoter;
-    private List<Promoter> promoters;
-    private Sales sales;
-    private Seatmap seatmap;
-    private Boolean test;
-    private TicketLimit ticketLimit;
+    @SerializedName("type")
+    @Expose
     private String type;
+    @SerializedName("id")
+    @Expose
+    private String id;
+    @SerializedName("test")
+    @Expose
+    private Boolean test;
+    @SerializedName("url")
+    @Expose
     private String url;
-
+    @SerializedName("locale")
+    @Expose
+    private String locale;
+    @SerializedName("images")
+    @Expose
+    private List<Image> images = null;
+    @SerializedName("sales")
+    @Expose
+    private Sales sales;
+    @SerializedName("dates")
+    @Expose
+    private Dates dates;
+    @SerializedName("classifications")
+    @Expose
+    private List<Classification> classifications = null;
+    @SerializedName("promoter")
+    @Expose
+    private Promoter promoter;
+    @SerializedName("promoters")
+    @Expose
+    private List<Promoter_> promoters = null;
+    @SerializedName("priceRanges")
+    @Expose
+    private List<PriceRange> priceRanges = null;
+    @SerializedName("_links")
+    @Expose
+    private Links links;
+    @SerializedName("_embedded")
+    @Expose
+    private Embedded embedded;
 }

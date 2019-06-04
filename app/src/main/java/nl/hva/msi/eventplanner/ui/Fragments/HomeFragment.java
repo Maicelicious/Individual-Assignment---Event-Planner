@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import nl.hva.msi.eventplanner.R;
+import nl.hva.msi.eventplanner.ui.Fragments.Viewmodel.HomeViewModel;
 
 
 /**
@@ -79,7 +80,7 @@ public class HomeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        FloatingActionButton fab = view.findViewById(R.id.homeFab);
+        FloatingActionButton fab = view.findViewById(R.id.searchFab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

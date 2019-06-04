@@ -4,12 +4,20 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.List;
 
 import nl.hva.msi.eventplanner.R;
+import nl.hva.msi.eventplanner.application.ApiService;
+import nl.hva.msi.eventplanner.application.GetCallback;
+import nl.hva.msi.eventplanner.data.event.model.Event;
+import nl.hva.msi.eventplanner.ui.Fragments.Viewmodel.EventViewModel;
 
 
 /**
@@ -26,6 +34,11 @@ public class EventFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private TextView textView;
+    private Event newEvent;
+
+    private View eventView;
+
     private EventViewModel eventViewModel;
 
     // TODO: Rename and change types of parameters
@@ -35,7 +48,6 @@ public class EventFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public EventFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -65,11 +77,41 @@ public class EventFragment extends Fragment {
         }
     }
 
+    private void apiCall(){
+        ApiService apiService = ApiService.getInstance();
+
+        ApiService.getInstance().getEventById(new GetCallback() {
+            @Override
+            public void onSuccess(Event event) {
+                newEvent = event;
+                textView.setText(newEvent.getName());
+            }
+
+            @Override
+            public void onError() {
+                textView.setText("Api does not work");
+            }
+
+            @Override
+            public void onSuccess(List<Event> event) {
+
+            }
+        }, "Z698xZbpZ17FtoM");
+
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event, container, false);
+        eventView = inflater.inflate(R.layout.fragment_event, container, false);
+
+        textView = eventView.findViewById(R.id.apiTestText);
+        FloatingActionButton fab = eventView.findViewById(R.id.searchFab);
+        fab.setOnClickListener(view1 -> {
+            apiCall();
+        });
+        return eventView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -107,7 +149,6 @@ public class EventFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
@@ -115,6 +156,5 @@ public class EventFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         eventViewModel = ViewModelProviders.of(this).get(EventViewModel.class);
-        // TODO: Use the ViewModel
     }
 }

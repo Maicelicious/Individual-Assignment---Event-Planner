@@ -46,7 +46,28 @@
                     android:id="@+id/groupNameInput"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/groupname" />
+                    android:hint="@string/groupname"
+                    android:autofillHints="groupName"
+                    android:inputType="text" />
+                <TextView
+                    android:id="@+id/groupDescription"
+                    android:text="@string/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/descriptionInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/description"
+                    android:autofillHints="@string/description"
+                    android:inputType="textMultiLine" />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/favourite"
+                    style="?android:attr/starStyle"
+                    android:id="@+id/favouriteCheckbox"/>
 
             </LinearLayout>
 
