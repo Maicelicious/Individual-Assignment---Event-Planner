@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 
 import nl.hva.msi.eventplanner.application.ApiService;
-import nl.hva.msi.eventplanner.data.event.model.Event;
+import nl.hva.msi.eventplanner.data.event.model.eventByIdModel.Event;
 
 public class EventViewModel extends AndroidViewModel {
 

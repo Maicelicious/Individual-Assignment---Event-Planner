@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="countryCodeArray">
+        <item>us</item>
+        <item>de</item>
+        <item>nl</item>
+        <item>gb</item>
+        <item>it</item>
+        <item>swe</item>
+    </string-array>
+</resources>

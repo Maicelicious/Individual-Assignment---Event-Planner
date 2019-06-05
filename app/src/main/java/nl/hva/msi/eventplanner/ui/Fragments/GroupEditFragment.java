@@ -40,7 +40,7 @@ public class GroupEditFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.group_edit_fragment, container, false);
 
-        toEditGroup = (GroupEntity) getArguments().getSerializable(GROUP_KEY);
+        toEditGroup = (GroupEntity) (getArguments() != null ? getArguments().getSerializable(GROUP_KEY) : null);
 
 
 
@@ -68,16 +68,17 @@ public class GroupEditFragment extends Fragment {
             if (newFragment != null) {
                 FragmentManager manager = getFragmentManager();
                 if (manager != null) {
-                    GroupEntity groupEntity = new GroupEntity();
+//                    GroupEntity groupEntity = new GroupEntity();
 
                     String groupName = groupEditText.getText().toString();
                     String editDescr = groupEditDescr.getText().toString();
                     boolean isFav = favourite.isChecked();
                     System.out.println(isFav);
-                    groupEntity.setGroupName(groupName);
-                    groupEntity.setDescription(editDescr);
-                    groupEntity.setFavourite(isFav);
-                    mViewModel.updateGroup(groupEntity);
+                    toEditGroup.setGroupName(groupName);
+                    toEditGroup.setDescription(editDescr);
+                    toEditGroup.setFavourite(isFav);
+
+                    mViewModel.updateGroup(toEditGroup);
                     manager.beginTransaction().replace(R.id.fragment_container, newFragment).commit();
 
                 } else {

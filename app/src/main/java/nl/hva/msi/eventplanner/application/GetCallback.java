@@ -1,13 +1,10 @@
 package nl.hva.msi.eventplanner.application;
 
-import java.util.List;
-
-import nl.hva.msi.eventplanner.data.event.model.Event;
+import nl.hva.msi.eventplanner.data.event.model.eventByCountryCodeModel.EventResponse;
 
 public interface GetCallback {
-    void onSuccess(Event event);
+    void onSuccess(EventResponse event);
 
     void onError();
 
-    void onSuccess(List<Event> event);
 }

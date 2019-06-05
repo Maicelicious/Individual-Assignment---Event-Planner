@@ -2,7 +2,7 @@ package nl.hva.msi.eventplanner.application;
 
 
 import nl.hva.msi.eventplanner.BuildConfig;
-import nl.hva.msi.eventplanner.data.event.model.Event;
+import nl.hva.msi.eventplanner.data.event.model.eventByCountryCodeModel.EventResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * This class is used to call API's and save them to the database a
  * Additional to that the ViewModel is used to get the values either through internet or local
  */
-public class ApiService {
+public class ApiService{
 
     private static final String BASE_URL = "https://app.ticketmaster.com/";
     private static final String LANGUAGE = "en-US";
@@ -41,12 +41,12 @@ public class ApiService {
         return apiService;
     }
 
-    public void getEventById(final GetCallback callback, String id) {
-        ticketMasterApi.getEventById(id, id, BuildConfig.ApiKey).enqueue(new Callback<Event>() {
+    public void getEventById( String id, final GetCallback callback) {
+        ticketMasterApi.getEventById(id, BuildConfig.ApiKey).enqueue(new Callback<EventResponse>() {
             @Override
-            public void onResponse(Call<Event> call, Response<Event> response) {
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 if (response.isSuccessful()) {
-                    Event event = response.body();
+                    EventResponse event = response.body();
                     if (event != null) {
                         callback.onSuccess(event);
                     } else {
@@ -56,8 +56,135 @@ public class ApiService {
             }
 
             @Override
-            public void onFailure(Call<Event> call, Throwable t) {
+            public void onFailure(Call<EventResponse> call, Throwable t) {
                 callback.onError();
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+    public void getEventsByCountryCode(String countryCode, final GetCallback getCallback) {
+        ticketMasterApi.getEventsByCountryCode(countryCode, BuildConfig.ApiKey).enqueue(new Callback<EventResponse>() {
+            @Override
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                if (response.isSuccessful()) {
+                    EventResponse eventResponse = response.body();
+                    getCallback.onSuccess(eventResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventResponse> call, Throwable t) {
+                getCallback.onError();
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+    public void getEventByKeyWord(String keyword, final GetCallback getCallback) {
+        ticketMasterApi.getEventByKeyWord(keyword, BuildConfig.ApiKey).enqueue(new Callback<EventResponse>() {
+            @Override
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                if (response.isSuccessful()) {
+                    EventResponse eventResponse = response.body();
+                    getCallback.onSuccess(eventResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventResponse> call, Throwable t) {
+                getCallback.onError();
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+    public void getEventByKeyWordAndCountryCode(String keyword, String countryCode, final GetCallback getCallback) {
+        ticketMasterApi.getEventByKeyWordAndCountryCode(keyword, countryCode, BuildConfig.ApiKey).enqueue(new Callback<EventResponse>() {
+            @Override
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                if (response.isSuccessful()) {
+                    EventResponse eventResponse = response.body();
+                    getCallback.onSuccess(eventResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventResponse> call, Throwable t) {
+                getCallback.onError();
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+    public void  getEventsByCity(String city, final GetCallback callback) {
+        ticketMasterApi.getEventsByCity(city, BuildConfig.ApiKey).enqueue(new Callback<EventResponse>() {
+            @Override
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                if (response.isSuccessful()) {
+                    EventResponse eventResponse = response.body();
+                    callback.onSuccess(eventResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventResponse> call, Throwable t) {
+                callback.onError();
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+    public void getEventsByCityAndKeyword(String city, String keyword, final GetCallback callback) {
+        ticketMasterApi.getEventsByCityAndKeyword(city, keyword, BuildConfig.ApiKey).enqueue(new Callback<EventResponse>() {
+            @Override
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                if (response.isSuccessful()) {
+                    EventResponse eventResponse = response.body();
+                    callback.onSuccess(eventResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventResponse> call, Throwable t) {
+                callback.onError();
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+    public void getEventsByCityAndCountryCode(String city, String countryCode, final GetCallback callback) {
+        ticketMasterApi.getEventsByCityAndCountryCode(city, countryCode, BuildConfig.ApiKey).enqueue(new Callback<EventResponse>() {
+            @Override
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                if (response.isSuccessful()) {
+                    EventResponse eventResponse = response.body();
+                    callback.onSuccess(eventResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventResponse> call, Throwable t) {
+                callback.onError();
+                System.out.println(t.getMessage());
+            }
+        });
+    }
+
+    public void getEventsByCityAndCountryCodeAndKeyWord(String city, String countryCode, String keyword, final GetCallback callback) {
+        ticketMasterApi.getEventsByCityAndCountryCodeAndKeyWord(city, countryCode, keyword, BuildConfig.ApiKey).enqueue(new Callback<EventResponse>() {
+            @Override
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                if (response.isSuccessful()) {
+                    EventResponse eventResponse = response.body();
+                    callback.onSuccess(eventResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventResponse> call, Throwable t) {
+                callback.onError();
+                System.out.println(t.getMessage());
             }
         });
     }

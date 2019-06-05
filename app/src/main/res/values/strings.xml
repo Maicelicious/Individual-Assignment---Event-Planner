@@ -30,4 +30,21 @@
     <string name="description">Description</string>
     <string name="favourite">Favourite</string>
     <string name="editgroup">editGroup</string>
+    <string name="eventimage">EventImage</string>
+    <string name="pricerangetext">priceRangeText</string>
+    <string name="price_range">Price Range</string>
+    <string name="isAvailable">false</string>
+    <string name="availabillity">Availabillity</string>
+    <string name="eventurl">eventUrl</string>
+    <string name="event_url">Event URL</string>
+    <string name="country">Country</string>
+    <string name="address">Address</string>
+    <string name="addresstext">addressText</string>
+    <string name="citytext">cityText</string>
+    <string name="searchicon">searchIcon</string>
+    <string name="search">Search</string>
+    <string name="country_code">Country Code</string>
+    <string name="keyword">KeyWord</string>
+    <string name="please_enter_your_desired_search_parameters">Please enter your desired search parameter/s!</string>
+    <string name="ticketAvailability">TicketAvailability</string>
 </resources>

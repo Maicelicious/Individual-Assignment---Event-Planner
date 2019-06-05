@@ -12,42 +12,23 @@ public class EventEntity implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private Long EntityID;
 
-    @ColumnInfo(name = "dateTime")
-    private String dateTime;
-    @ColumnInfo(name = "localDate")
-    private String localDate;
-    @ColumnInfo(name = "localTime")
-    private String localTime;
     @ColumnInfo(name = "statusCode")
     private String statusCode;
-    @ColumnInfo(name = "timezone")
-    private String timezone;
-    @ColumnInfo(name = "imageHeight")
-    private long imageHeight;
-    @ColumnInfo(name = "imageRatio")
-    private String imageRatio;
+
     @ColumnInfo(name = "imageUrl")
     private String imageUrl;
-    @ColumnInfo(name = "imageWidth")
-    private long imageWidth;
+
     @ColumnInfo(name = "id")
     private String id;
-    @ColumnInfo(name = "locale")
-    private String locale;
+
     @ColumnInfo(name = "name")
     private String name;
-    @ColumnInfo(name = "pleaseNote")
-    private String pleaseNote;
-    @ColumnInfo(name = "type")
-    private String type;
+
     @ColumnInfo(name = "url")
     private String url;
     @ColumnInfo(name = "genre")
     private String genre;
-    @ColumnInfo(name = "childRule")
-    private String childRule;
-    @ColumnInfo(name = "generalRule")
-    private String generalRule;
+
     @ColumnInfo(name = "city")
     private String city;
     @ColumnInfo(name = "country")
@@ -56,8 +37,6 @@ public class EventEntity implements Serializable {
     private String countryCode;
     @ColumnInfo(name = "adress")
     private String adress;
-    @ColumnInfo(name = "eventType")
-    private String eventType;
 
     @ColumnInfo(name = "salesEndDateTime")
     private String salesEndDateTime;
@@ -65,13 +44,21 @@ public class EventEntity implements Serializable {
     private String salesStartDateTime;
 
     @ColumnInfo(name = "ticketSaleState")
-    private String ticketSaleState;
+    private boolean ticketSaleState;
+    @ColumnInfo(name = "priceMin")
+    private Double priceMin;
 
-    public String getTicketSaleState() {
+    @ColumnInfo(name = "priceMax")
+    private Double priceMax;
+
+    @ColumnInfo(name = "startDate")
+    private String startDate;
+
+    public boolean getTicketSaleState() {
         return ticketSaleState;
     }
 
-    public void setTicketSaleState(String ticketSaleState) {
+    public void setTicketSaleState(boolean ticketSaleState) {
         this.ticketSaleState = ticketSaleState;
     }
 
@@ -83,60 +70,12 @@ public class EventEntity implements Serializable {
         EntityID = entityID;
     }
 
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public String getLocalDate() {
-        return localDate;
-    }
-
-    public void setLocalDate(String localDate) {
-        this.localDate = localDate;
-    }
-
-    public String getLocalTime() {
-        return localTime;
-    }
-
-    public void setLocalTime(String localTime) {
-        this.localTime = localTime;
-    }
-
     public String getStatusCode() {
         return statusCode;
     }
 
     public void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
-    }
-
-    public String getTimezone() {
-        return timezone;
-    }
-
-    public void setTimezone(String timezone) {
-        this.timezone = timezone;
-    }
-
-    public long getImageHeight() {
-        return imageHeight;
-    }
-
-    public void setImageHeight(long imageHeight) {
-        this.imageHeight = imageHeight;
-    }
-
-    public String getImageRatio() {
-        return imageRatio;
-    }
-
-    public void setImageRatio(String imageRatio) {
-        this.imageRatio = imageRatio;
     }
 
     public String getImageUrl() {
@@ -147,14 +86,6 @@ public class EventEntity implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public long getImageWidth() {
-        return imageWidth;
-    }
-
-    public void setImageWidth(long imageWidth) {
-        this.imageWidth = imageWidth;
-    }
-
     public String getId() {
         return id;
     }
@@ -163,13 +94,6 @@ public class EventEntity implements Serializable {
         this.id = id;
     }
 
-    public String getLocale() {
-        return locale;
-    }
-
-    public void setLocale(String locale) {
-        this.locale = locale;
-    }
 
     public String getName() {
         return name;
@@ -179,21 +103,6 @@ public class EventEntity implements Serializable {
         this.name = name;
     }
 
-    public String getPleaseNote() {
-        return pleaseNote;
-    }
-
-    public void setPleaseNote(String pleaseNote) {
-        this.pleaseNote = pleaseNote;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getUrl() {
         return url;
@@ -209,22 +118,6 @@ public class EventEntity implements Serializable {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }
-
-    public String getChildRule() {
-        return childRule;
-    }
-
-    public void setChildRule(String childRule) {
-        this.childRule = childRule;
-    }
-
-    public String getGeneralRule() {
-        return generalRule;
-    }
-
-    public void setGeneralRule(String generalRule) {
-        this.generalRule = generalRule;
     }
 
     public String getCity() {
@@ -259,14 +152,6 @@ public class EventEntity implements Serializable {
         this.adress = adress;
     }
 
-    public String getEventType() {
-        return eventType;
-    }
-
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
-
     public String getSalesStartDateTime() {
         return salesStartDateTime;
     }
@@ -281,5 +166,29 @@ public class EventEntity implements Serializable {
 
     public void setSalesEndDateTime(String salesEndDateTime) {
         this.salesEndDateTime = salesEndDateTime;
+    }
+
+    public Double getPriceMin() {
+        return priceMin;
+    }
+
+    public void setPriceMin(Double priceMin) {
+        this.priceMin = priceMin;
+    }
+
+    public Double getPriceMax() {
+        return priceMax;
+    }
+
+    public void setPriceMax(Double priceMax) {
+        this.priceMax = priceMax;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 }
