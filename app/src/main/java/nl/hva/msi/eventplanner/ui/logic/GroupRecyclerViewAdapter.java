@@ -14,6 +14,9 @@ import java.util.List;
 import nl.hva.msi.eventplanner.R;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
 
+/**
+ * Adapter for the GroupRecyclerView
+ */
 public class GroupRecyclerViewAdapter extends RecyclerView.Adapter<GroupRecyclerViewAdapter.ViewHolder> {
 
     List<GroupEntity> allGroupEntities;
@@ -54,7 +57,7 @@ public class GroupRecyclerViewAdapter extends RecyclerView.Adapter<GroupRecycler
         }
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         CardView parentLayout;
         TextView groupName;
         TextView created;

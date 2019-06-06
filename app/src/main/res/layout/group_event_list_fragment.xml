@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.Fragments.GroupEventListFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewGroupEvent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

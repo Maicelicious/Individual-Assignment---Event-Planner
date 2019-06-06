@@ -123,7 +123,7 @@ public class GroupFragment extends Fragment implements RecyclerView.OnItemTouchL
             @Override
             public void onClick(View view, int position) {
                 GroupEntity group = groups.get(position);
-                Fragment newFragment = new GroupEventListFragment();
+                Fragment newFragment = GroupEventListFragment.newInstance(group);
                 FragmentManager manager = getFragmentManager();
                 if (manager != null) {
                     manager.beginTransaction().replace(R.id.fragment_container, newFragment).commit();

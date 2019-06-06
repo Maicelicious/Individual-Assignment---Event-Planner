@@ -1,6 +1,6 @@
 package nl.hva.msi.eventplanner.application;
 
-import nl.hva.msi.eventplanner.data.event.model.eventByCountryCodeModel.EventResponse;
+import nl.hva.msi.eventplanner.data.event.model.EventResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

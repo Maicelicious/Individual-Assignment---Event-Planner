@@ -30,6 +30,11 @@ public class EventRepo implements EventDao {
     }
 
     @Override
+    public LiveData<EventEntity> getEventByID(String id) {
+        return eventDao.getEventByID(id);
+    }
+
+    @Override
     public void insertEvent(EventEntity event) {
         executor.execute(()-> eventDao.insertEvent(event));
     }

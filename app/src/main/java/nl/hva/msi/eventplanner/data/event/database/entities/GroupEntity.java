@@ -20,6 +20,7 @@ public class GroupEntity implements Serializable {
     @ColumnInfo(name = "favourite")
     private boolean favourite;
 
+
     public long getId() {
         return id;
     }

@@ -2,7 +2,8 @@ package nl.hva.msi.eventplanner.application;
 
 
 import nl.hva.msi.eventplanner.BuildConfig;
-import nl.hva.msi.eventplanner.data.event.model.eventByCountryCodeModel.EventResponse;
+import nl.hva.msi.eventplanner.data.event.database.repos.EventRepo;
+import nl.hva.msi.eventplanner.data.event.model.EventResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,9 +23,12 @@ public class ApiService{
 
     private TicketMasterApi ticketMasterApi;
 
+    private EventRepo eventRepo;
+
 
     private ApiService(TicketMasterApi api) {
         this.ticketMasterApi = api;
+
     }
 
 
@@ -87,6 +91,7 @@ public class ApiService{
             public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 if (response.isSuccessful()) {
                     EventResponse eventResponse = response.body();
+
                     getCallback.onSuccess(eventResponse);
                 }
             }

@@ -3,16 +3,18 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardViewEdit"
+        android:id="@+id/cardEventViewEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:background="@color/cardview_light_background"
-        card_view:cardCornerRadius="10dp"
+        android:elevation="4dp"
+        card_view:cardCornerRadius="20dp"
         card_view:cardElevation="2dp"
+        android:layout_marginBottom="16dp"
         card_view:contentPadding="16dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
@@ -22,9 +24,9 @@
             android:id="@+id/cardViewBackgroundImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/image_pink"
             android:contentDescription="the backgroundImage"
+            android:scaleType="fitXY"
+            android:alpha="0.25"
             tools:ignore="HardcodedText" />
 
 
@@ -39,7 +41,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/eventName"
+                    android:id="@+id/eventNameHead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/eventName"
@@ -59,12 +61,11 @@
                     android:text="@string/date" />
 
                 <TextView
-                    android:id="@+id/dateTextView"
+                    android:id="@+id/dateEventTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@string/date" />
+                    android:gravity="end" />
             </LinearLayout>
 
             <LinearLayout
@@ -98,8 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="@string/country" />
+                        android:gravity="end" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -120,15 +120,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="@string/citytext" />
+                        android:gravity="end" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/adress"
@@ -143,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end"
-                        android:text="@string/addresstext" />
+                         />
                 </LinearLayout>
 
             </LinearLayout>
@@ -151,13 +150,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/eventUrl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/event_url" />
 
                 <TextView
@@ -186,8 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@string/isAvailable" />
+                    android:gravity="end" />
             </LinearLayout>
 
             <LinearLayout
@@ -207,11 +206,56 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@string/pricerangetext" />
+                    android:gravity="end" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/cardViewEdit">
+
+                <TextView
+                    android:id="@+id/addToGroupText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/smth" />
+
+                <Spinner
+                    android:id="@+id/spinnerGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <TextView
+                        android:id="@+id/addToGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/add_to_group" />
+
+                    <ImageButton
+                        android:id="@+id/addToGroupButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        card_view:srcCompat="@android:drawable/ic_menu_add"
+                        tools:ignore="ContentDescription" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
+
 </android.support.constraint.ConstraintLayout>

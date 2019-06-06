@@ -47,4 +47,6 @@
     <string name="keyword">KeyWord</string>
     <string name="please_enter_your_desired_search_parameters">Please enter your desired search parameter/s!</string>
     <string name="ticketAvailability">TicketAvailability</string>
+    <string name="add_to_group">Add to Group:</string>
+    <string name="smth">Select a group to add the Event to</string>
 </resources>
