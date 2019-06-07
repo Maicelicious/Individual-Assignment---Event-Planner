@@ -13,6 +13,9 @@ import nl.hva.msi.eventplanner.data.event.database.daos.GroupDao;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
 import nl.hva.msi.eventplanner.data.event.database.repos.GroupRepo;
 
+/**
+ * This is the ViewModel Class of the GroupCreateFragment which makes the CRUD functionality for the Fragemt
+ */
 public class GroupCreateViewModel extends AndroidViewModel implements GroupDao {
 
     private GroupRepo groupRepo;

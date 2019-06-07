@@ -14,7 +14,9 @@ import nl.hva.msi.eventplanner.ui.Fragments.EventShareFragment;
 import nl.hva.msi.eventplanner.ui.Fragments.GroupFragment;
 import nl.hva.msi.eventplanner.ui.Fragments.HomeFragment;
 
-
+/**
+ * This is the Main Activity where you have the Layout Container that switches the Fragments on Navbarclick
+ */
 public class MainActivity extends AppCompatActivity {
 
     private Fragment homeFragment;

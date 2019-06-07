@@ -19,6 +19,11 @@ import nl.hva.msi.eventplanner.R;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
 import nl.hva.msi.eventplanner.ui.Fragments.Viewmodel.GroupCreateViewModel;
 
+/**
+ * This is the class of the GroupCreateFragment.
+ * It is used and fitted in the Container of the MainActivity when you click on the GroupTab the Add Button.
+ * It is used to create a new Group and save it.
+ */
 public class GroupCreateFragment extends Fragment {
 
     private GroupCreateViewModel groupCreateViewModel;

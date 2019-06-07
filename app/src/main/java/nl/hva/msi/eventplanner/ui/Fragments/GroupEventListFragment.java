@@ -22,21 +22,28 @@ import nl.hva.msi.eventplanner.data.event.database.entities.GroupEventLink;
 import nl.hva.msi.eventplanner.ui.Fragments.Viewmodel.GroupEventListViewModel;
 import nl.hva.msi.eventplanner.ui.logic.GroupListRecyclerViewAdapter;
 
+/**
+ * This class defines the Fragment which is created when a Group is clicked and all linked
+ * Events to this group will be shown in a RecyclerView
+ */
 public class GroupEventListFragment extends Fragment implements RecyclerView.OnItemTouchListener {
 
     private GroupEventListViewModel groupEventListViewModel;
     private GroupListRecyclerViewAdapter groupListRecyclerViewAdapter;
     private RecyclerView recyclerView;
-    private List<EventEntity> events = new LinkedList<>();
+    private List<EventEntity> events;
     private List<GroupEventLink> groupEventLinks;
     private View.OnClickListener getGetMyGameBack;
     private List<EventEntity> allEvents;
     private GroupEventLink tempGroupLink;
 
     private GroupEntity groupEntity;
-
-
     private static final String GROUP_KEY = "veryKey";
+
+
+    public GroupEventListFragment() {
+        events = new LinkedList<>();
+    }
 
     public static GroupEventListFragment newInstance(GroupEntity groupEntity) {
         GroupEventListFragment groupEventListFragment = new GroupEventListFragment();
@@ -59,12 +66,12 @@ public class GroupEventListFragment extends Fragment implements RecyclerView.OnI
             groupEntity = (GroupEntity) getArguments().getSerializable(GROUP_KEY);
         }
 
-
         groupEventListViewModel.getAllEvents().observe(this, events -> {
             if (events != null && !events.isEmpty()) {
                 allEvents = events;
             }
         });
+
 
         groupEventListViewModel.getAllLinks().observe(this, links -> {
             groupEventLinks = links;
@@ -96,7 +103,6 @@ public class GroupEventListFragment extends Fragment implements RecyclerView.OnI
         if (groupListRecyclerViewAdapter == null) {
             groupListRecyclerViewAdapter = new GroupListRecyclerViewAdapter(events);
             recyclerView.setAdapter(groupListRecyclerViewAdapter);
-            groupListRecyclerViewAdapter.notifyDataSetChanged();
         } else {
             groupListRecyclerViewAdapter.swapList(events);
 
@@ -108,6 +114,7 @@ public class GroupEventListFragment extends Fragment implements RecyclerView.OnI
         super.onActivityCreated(savedInstanceState);
         groupEventListViewModel = ViewModelProviders.of(this).get(GroupEventListViewModel.class);
         // TODO: Use the ViewModel
+
     }
 
     @Override

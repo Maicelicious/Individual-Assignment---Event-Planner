@@ -17,13 +17,6 @@ public interface TicketMasterApi {
             @Query("apikey") String apikey
     );
 
-    @GET("discovery/v2/events/{id}.json?attraction/")
-    Call<EventResponse> getEventsAndAttractionsById(
-            @Path("id") String id,
-            @Query("id") String attractionId,
-            @Query("apikey") String apiKey
-    );
-
     @GET("discovery/v2/events.json")
     Call<EventResponse> getEventsByCountryCode(
             @Query("countryCode") String countryCode,
@@ -42,12 +35,6 @@ public interface TicketMasterApi {
             @Query("apikey") String apiKey
     );
 
-    @GET("discovery/v2/events.json")
-    Call<EventResponse> getEventsByClassificationNameAndDMAID(
-            @Query("classificationName") String classificationName,
-            @Query("dmaId") String dmaId,
-            @Query("apikey") String apiKey
-    );
 
     @GET("discovery/v2/events.json")
     Call<EventResponse> getEventsByCity(

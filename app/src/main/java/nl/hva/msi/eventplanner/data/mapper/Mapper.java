@@ -8,6 +8,10 @@ import nl.hva.msi.eventplanner.data.event.database.entities.EventEntity;
 import nl.hva.msi.eventplanner.data.event.model.EventResponse;
 import nl.hva.msi.eventplanner.data.event.model.EventsItem;
 
+/**
+ * This class is the mapper for the EventResponse to the Entities.
+ * It only needs to be instanciated once so it is a Singleton
+ */
 public class Mapper {
 
     private static Mapper instance;
@@ -25,6 +29,11 @@ public class Mapper {
         }
     }
 
+    /**
+     * this method maps the API Response to all EventEntities that are needed.
+     * @param eventResponse
+     * @return
+     */
     public List<EventEntity> EventResponseToEntity(EventResponse eventResponse) {
         List<EventEntity> eventEntities = new ArrayList<>();
 

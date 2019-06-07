@@ -11,6 +11,9 @@ import nl.hva.msi.eventplanner.data.event.database.EventDatabase;
 import nl.hva.msi.eventplanner.data.event.database.entities.EventEntity;
 import nl.hva.msi.eventplanner.data.event.database.daos.EventDao;
 
+/**
+ * This is the Event Repository that holds the CRUD functionality for the EventEntities
+ */
 public class EventRepo implements EventDao {
 
     private EventDatabase eventDatabase;

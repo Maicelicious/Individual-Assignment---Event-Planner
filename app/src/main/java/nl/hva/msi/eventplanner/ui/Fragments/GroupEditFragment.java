@@ -17,6 +17,10 @@ import nl.hva.msi.eventplanner.R;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
 import nl.hva.msi.eventplanner.ui.Fragments.Viewmodel.GroupEditViewModel;
 
+/**
+ * This Fragment class is called while Long Pressing a Group that is in the Recyclerview of the GroupFragemt.
+ * It is used to alter the chosen Group.
+ */
 public class GroupEditFragment extends Fragment {
 
     private GroupEditViewModel mViewModel;

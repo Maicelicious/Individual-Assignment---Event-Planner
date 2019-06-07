@@ -1,7 +1,6 @@
 package nl.hva.msi.eventplanner.ui.Fragments;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,12 +30,7 @@ import nl.hva.msi.eventplanner.ui.logic.RecyclerViewTouchListener;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link EventFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link EventFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * This Fragment shows all Events that you get from the Event Search in a Recyclerview
  */
 public class EventFragment extends Fragment implements RecyclerView.OnItemTouchListener {
 
@@ -55,8 +49,6 @@ public class EventFragment extends Fragment implements RecyclerView.OnItemTouchL
     private List<EventEntity> events;
     private List<EventEntity> temEvents;
     private EventViewModel eventViewModel;
-
-    private OnFragmentInteractionListener mListener;
 
     private EventEntity addToGroupEntity;
 
@@ -161,63 +153,9 @@ public class EventFragment extends Fragment implements RecyclerView.OnItemTouchL
             public void onLongClick(View view, int position) {
             }
         }));
-
-
-        //Swiping with a ItemTouchHelper
-
-//        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-//            @Override
-//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-//                int pos = viewHolder.getAdapterPosition();
-
-        //TODO: Maybe add to a group
-//            tempEvent = events.get(pos);
-//            eventViewModel.deleteGroup(groups.get(pos));
-//            groups.remove(pos);
-//            groupRecyclerViewAdapter.notifyItemRemoved(pos);
-//
-//            Snackbar.make(Objects.requireNonNull(getActivity()).findViewById(android.R.id.content), tempGroup.getGroupName() + " has been deleted", Snackbar.LENGTH_LONG)
-//                    .setAction(R.string.snackbar_undo, getGetMyGameBack)
-//                    .setActionTextColor(Color.MAGENTA)
-//                    .show();
-//            }
-//        };
-//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-//        itemTouchHelper.attachToRecyclerView(recyclerView);
-//        recyclerView.addOnItemTouchListener(this);
-//
-//        //obviously we need Listeners for the Snackbar
-//        getGetMyGameBack = v -> {
-//            groupViewModel.insertGroup(tempGroup);
-//            updateUI();
-//        };
-//
         return eventView;
     }
 
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     private void updateUI() {
         if (eventRecyclerViewAdapter == null) {
@@ -231,7 +169,6 @@ public class EventFragment extends Fragment implements RecyclerView.OnItemTouchL
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
 
@@ -248,20 +185,6 @@ public class EventFragment extends Fragment implements RecyclerView.OnItemTouchL
     @Override
     public void onRequestDisallowInterceptTouchEvent(boolean b) {
 
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 
     @Override

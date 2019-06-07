@@ -11,6 +11,9 @@ import nl.hva.msi.eventplanner.data.event.database.EventDatabase;
 import nl.hva.msi.eventplanner.data.event.database.daos.GroupEventLinkDao;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEventLink;
 
+/**
+ * This is the Repository for the GroupEventLink class here you have the CRUD methods that call the Dao methods
+ */
 public class GroupEventLinkRepo implements GroupEventLinkDao {
 
     private EventDatabase eventDatabase;

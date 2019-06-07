@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
 
+
 @Entity(tableName = "groupEventLink")
 public class GroupEventLink implements Serializable {
 

@@ -22,6 +22,10 @@ import nl.hva.msi.eventplanner.data.event.model.EventResponse;
 import nl.hva.msi.eventplanner.data.mapper.Mapper;
 import nl.hva.msi.eventplanner.ui.Fragments.Viewmodel.EventSearchViewModel;
 
+/**
+ * This is the Event Search Fragment in which you can search and call different API's
+ * It uses the APi Service to get the Event Response
+ */
 public class EventSearchFragment extends Fragment {
 
     private EventResponse eventResponse;
@@ -58,6 +62,13 @@ public class EventSearchFragment extends Fragment {
         return view;
     }
 
+    /**
+     * THis Method switches the API Call depending which Parameters are not empty and what type
+     * of parameters are set
+     * @param countryCode
+     * @param city
+     * @param keyword
+     */
     private void searchWithParameters(String countryCode, String city, String keyword) {
 
         if (!countryCode.trim().isEmpty() && !city.trim().isEmpty() && !keyword.trim().isEmpty()) {
@@ -84,6 +95,10 @@ public class EventSearchFragment extends Fragment {
         }
     }
 
+    /**
+     * THis calls the API which searches after a keyword and only a keyword.
+     * @param keyword
+     */
     private void apiCallWithKeyWord(String keyword) {
         apiService.getEventByKeyWord(keyword, new GetCallback() {
             @Override
@@ -103,11 +118,19 @@ public class EventSearchFragment extends Fragment {
 
     }
 
+    /**
+     * THis method calls the API that makes the request with the parameter city
+     * @param city
+     */
     private void apiCallOnlyCity(String city) {
         apiService.getEventsByCity(city, new GetCallback() {
             @Override
             public void onSuccess(EventResponse event) {
-                eventResponse = event;
+                List<EventEntity> eventMapperList = Mapper.getInstance().EventResponseToEntity(event);
+                for (EventEntity e :
+                        eventMapperList) {
+                    eventRepo.insertEvent(e);
+                }
             }
 
             @Override
@@ -138,6 +161,10 @@ public class EventSearchFragment extends Fragment {
         });
     }
 
+    /**
+     * This method makes the API Call for only the countryCode
+     * @param countryCode
+     */
     private void apiCallOnlyCC(String countryCode) {
         apiService.getEventsByCountryCode(countryCode, new GetCallback() {
             @Override
@@ -155,7 +182,11 @@ public class EventSearchFragment extends Fragment {
             }
         });
     }
-
+    /**
+     * This method makes the API Call for  the countryCode and the City
+     * It is called when the countryCode and the City are set
+     * @param countryCode
+     */
     private void apiCallWithCCAndCity(String countryCode, String city) {
         apiService.getEventsByCityAndCountryCode(city, countryCode, new GetCallback() {
             @Override
@@ -174,7 +205,11 @@ public class EventSearchFragment extends Fragment {
         });
 
     }
-
+    /**
+     * This method makes the API Call for the countryCode and the Keyword
+     * It get used if the countryCode and the Keyword are set
+     * @param countryCode
+     */
     private void apiCallWithCCAndKeyword(String countryCode, String keyword) {
         apiService.getEventByKeyWordAndCountryCode(keyword, countryCode, new GetCallback() {
             @Override
@@ -194,6 +229,13 @@ public class EventSearchFragment extends Fragment {
 
     }
 
+    /**
+     * This Method calls the API which uses all 3 params
+     * It is called when all 3 parameters are set.
+     * @param countryCode
+     * @param city
+     * @param keyword
+     */
     private void apiCallWithEveryParam(String countryCode, String city, String keyword) {
         apiService.getEventsByCityAndCountryCodeAndKeyWord(city, countryCode, keyword, new GetCallback() {
             @Override

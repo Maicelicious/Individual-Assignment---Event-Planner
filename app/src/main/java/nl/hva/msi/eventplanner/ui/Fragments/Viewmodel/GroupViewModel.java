@@ -13,6 +13,9 @@ import nl.hva.msi.eventplanner.data.event.database.daos.GroupDao;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
 import nl.hva.msi.eventplanner.data.event.database.repos.GroupRepo;
 
+/**
+ * This is the GroupViewModel where you have the CRUD functionalities for the GroupFragment
+ */
 public class GroupViewModel extends AndroidViewModel implements GroupDao {
 
     private GroupRepo groupRepo;

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import java.io.InputStream;
 
 /**
- * This class is used to fetch images async
+ * This class is used to fetch images async for a URL and maps them to a Bitmap
  */
 public class ImageStream extends AsyncTask<String, Void, Bitmap> {
 

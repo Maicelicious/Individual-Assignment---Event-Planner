@@ -13,6 +13,9 @@ import nl.hva.msi.eventplanner.data.event.database.daos.GroupDao;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
 import nl.hva.msi.eventplanner.data.event.database.repos.GroupRepo;
 
+/**
+ * This is the ViewModel Class of the GroupEditFragment which makes the CRUD functionality for the Fragemt
+ */
 public class GroupEditViewModel extends AndroidViewModel implements GroupDao {
     private GroupRepo groupRepo;
     private LiveData<List<GroupEntity>> groups;

@@ -33,12 +33,8 @@ import nl.hva.msi.eventplanner.ui.logic.RecyclerViewTouchListener;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link GroupFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link GroupFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * This class is used for the Group View where you can list all your groups.
+ * In this you have the RecyclerView that lists all Groups
  */
 public class GroupFragment extends Fragment implements RecyclerView.OnItemTouchListener {
     // TODO: Rename parameter arguments, choose names that match

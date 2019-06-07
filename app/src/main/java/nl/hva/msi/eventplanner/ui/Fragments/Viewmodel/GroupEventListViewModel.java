@@ -19,6 +19,10 @@ import nl.hva.msi.eventplanner.data.event.database.repos.GroupEventLinkRepo;
 import nl.hva.msi.eventplanner.data.event.database.repos.GroupRepo;
 import nl.hva.msi.eventplanner.data.mapper.Mapper;
 
+/**
+ * This is the ViewModel of the Events that are attached to a group
+ * Here you can access all 3 Repositories to save and get everything from the DB
+ */
 public class GroupEventListViewModel extends AndroidViewModel implements GroupDao, EventDao, GroupEventLinkDao {
 
 
@@ -39,9 +43,6 @@ public class GroupEventListViewModel extends AndroidViewModel implements GroupDa
         this.eventRepo = new EventRepo(application.getApplicationContext());
         this.groupRepo = new GroupRepo(application.getApplicationContext());
         this.groupEventLinkRepo = new GroupEventLinkRepo(application.getApplicationContext());
-        groups = groupRepo.getAllGroups();
-        events = eventRepo.getAllEvents();
-
     }
 
     @Override
@@ -71,7 +72,7 @@ public class GroupEventListViewModel extends AndroidViewModel implements GroupDa
 
     @Override
     public LiveData<List<GroupEntity>> getAllGroups() {
-        return groups;
+        return groupRepo.getAllGroups();
     }
 
     @Override
@@ -108,5 +109,4 @@ public class GroupEventListViewModel extends AndroidViewModel implements GroupDa
     public void updateLink(GroupEventLink link) {
 
     }
-    // TODO: Implement the ViewModel
 }

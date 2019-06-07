@@ -15,7 +15,7 @@ import nl.hva.msi.eventplanner.R;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
 
 /**
- * Adapter for the GroupRecyclerView
+ * Adapter for the GroupRecyclerView that is in the Group Fragment
  */
 public class GroupRecyclerViewAdapter extends RecyclerView.Adapter<GroupRecyclerViewAdapter.ViewHolder> {
 

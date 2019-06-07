@@ -25,6 +25,9 @@ import nl.hva.msi.eventplanner.data.event.database.entities.GroupEntity;
 import nl.hva.msi.eventplanner.data.event.database.entities.GroupEventLink;
 import nl.hva.msi.eventplanner.data.event.database.repos.GroupEventLinkRepo;
 
+/**
+ * The Recycler View Adapter Class for the Event Fragment
+ */
 public class EventRecyclerViewAdapter extends RecyclerView.Adapter<EventRecyclerViewAdapter.ViewHolder> {
 
 

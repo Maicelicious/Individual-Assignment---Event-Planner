@@ -17,6 +17,10 @@ import nl.hva.msi.eventplanner.data.event.database.repos.GroupRepo;
 import nl.hva.msi.eventplanner.data.event.model.EventResponse;
 import nl.hva.msi.eventplanner.data.mapper.Mapper;
 
+/**
+ * This class is the ViewModel of the EventFragment class.
+ * Here you have the possibily to acces the EventRepo and the GroupRepo
+ */
 public class EventViewModel extends AndroidViewModel implements EventDao, GroupDao {
 
     private ApiService apiService;
@@ -34,10 +38,14 @@ public class EventViewModel extends AndroidViewModel implements EventDao, GroupD
         groups = groupRepo.getAllGroups();
     }
 
+    /**
+     * This method maps a EventResponse which you get after making a API Call
+     * to EventEnities and saves them afterwards
+     * @param eventResponse
+     */
     public void mapAndSaveEvents(EventResponse eventResponse) {
         List<EventEntity> newEventEntities = mapper.EventResponseToEntity(eventResponse);
         if (newEventEntities.isEmpty()) {
-            //TODO SMth
         }
         for (EventEntity e:
              newEventEntities) {

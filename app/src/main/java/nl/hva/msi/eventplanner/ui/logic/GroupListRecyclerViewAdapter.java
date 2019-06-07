@@ -14,6 +14,9 @@ import java.util.List;
 import nl.hva.msi.eventplanner.R;
 import nl.hva.msi.eventplanner.data.event.database.entities.EventEntity;
 
+/**
+ * The Recycler View Adapter Class for the the Group Event Link Fragment
+ */
 public class GroupListRecyclerViewAdapter extends RecyclerView.Adapter<GroupListRecyclerViewAdapter.ViewHolder> {
 
     private List<EventEntity> allEventEntities;
